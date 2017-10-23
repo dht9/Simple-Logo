@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Map;
-
 /**
  * Represents a single line of SLogo code that can be executed. 
  *
@@ -16,6 +14,5 @@ public interface Command {
 	 *            The list of variables, which this may alter or add to
 	 * @return The result of the command this represents
 	 */
-	public double execute(Turtle t, Map<String, CommandDef> commands, Map<String, Double> variables); // TBD Collection types
-
+	public double execute(Turtle t, CommandManager commands, VariableManager variables);
 }

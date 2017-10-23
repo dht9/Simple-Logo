@@ -1,10 +1,9 @@
 package model.commands;
 
-import java.util.Map;
-
 import model.Command;
-import model.CommandDef;
+import model.CommandManager;
 import model.Turtle;
+import model.VariableManager;
 
 public class Forward implements Command {
 
@@ -15,10 +14,10 @@ public class Forward implements Command {
 	}
 
 	@Override
-	public double execute(Turtle t, Map<String, CommandDef> commands, Map<String, Double> variables) {
+	public double execute(Turtle t, CommandManager commands, VariableManager variables) {
 		double result = input.execute(t, commands, variables);
-		t.setXY(t.getX() - result * Math.sin(Math.toDegrees(t.getHeading())),
-				t.getY() + result * Math.sin(Math.toDegrees(t.getHeading())));
+		t.setXY(t.getX() - result * Math.sin(Math.toRadians(t.getHeading())),
+				t.getY() + result * Math.cos(Math.toRadians(t.getHeading())));
 		return result;
 	}
 

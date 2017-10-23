@@ -1,10 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.scene.paint.Color;
-import view.API.TurtleListenerAPI;
+import view.API.TurtleListener;
 
 /**
  * A representation of the state of the turtle at a given time. Notifies all
@@ -13,7 +10,7 @@ import view.API.TurtleListenerAPI;
  */
 public class Turtle implements ImmutableTurtle {
 	
-	private List<TurtleListenerAPI> listeners;
+	private TurtleListener listener;
 	private double x;
 	private double initX;
 	private double y;
@@ -35,11 +32,12 @@ public class Turtle implements ImmutableTurtle {
 		penColor = DEFAULT_PEN_COLOR;
 	}
 	
-	public void addTurtleListener(TurtleListenerAPI tL) {
-		listeners.add(tL);
+	// need to add to interface
+	public void addTurtleListener(TurtleListener tL) {
+		listener = tL;
+		tL.setTurtle(this);
 	}
 	
-
 	public double getX() {
 		return x;
 	}
@@ -67,51 +65,41 @@ public class Turtle implements ImmutableTurtle {
 	public void setXY(double newX, double newY) {
 		x = newX;
 		y = newY;
-		for(TurtleListenerAPI tL : listeners) {
-			tL.locationChange(newX, newY);
-		}
+		listener.locationChange(newX, newY);
+//		System.out.println(x + ", " + y);
 	}
 
 	public void setHeading(double newHeading) {
 		heading = newHeading;
-		for(TurtleListenerAPI tL : listeners) {
-			tL.headingChange(newHeading);
-		}
+		listener.headingChange(newHeading);
+//		System.out.println("H = " + heading);
 	}
 
 	public void setPenDown(boolean down) {
 		penDown = down;
-		for(TurtleListenerAPI tL : listeners) {
-			tL.penChange(down);
-		}
+		listener.penChange(down);
 	}
 
 	public void setVisible(boolean visible) {
 		isVisible = visible;
-		for(TurtleListenerAPI tL : listeners) {
-			tL.visibilityChange(visible);
-		}
+		listener.visibilityChange(visible);
 	}
 
+	@Override
 	public void setPenColor(Color color) {
 		penColor = color;
-		for(TurtleListenerAPI tL : listeners) {
-			tL.penColorChange(color);
-		}
+		listener.penColorChange(color);
 	}
 
 	/**
 	 * Returns to original position, heading, visibility, and pen position, then notifies the listeners to clear
 	 */
 	public void clearScreen() {
-		x = initX;
-		y = initY;
-		heading = initHeading;
-		penDown = true;
-		isVisible = true;
-		penColor = DEFAULT_PEN_COLOR;
-		for(TurtleListenerAPI tL : listeners) {
-			tL.clearScreen();
-		}
+		setXY(initX, initY);
+		setHeading(initHeading);
+		setPenDown(true);
+		setVisible(true);
+		setPenColor(DEFAULT_PEN_COLOR);
+		listener.clearScreen();
 	}
 }
