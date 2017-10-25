@@ -1,22 +1,17 @@
-package view;
+package view.Toolbar;
 
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ResourceBundle;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import view.API.SubcomponentViewAPI;
 
 /**
@@ -27,12 +22,14 @@ import view.API.SubcomponentViewAPI;
  */
 public class ToolbarView implements SubcomponentViewAPI {
 
+    private ResourceBundle myResources = ResourceBundle.getBundle("resources.view/view");
 	private static final double NODE_SPACING = 50;
 	private HBox myToolbar;
 	private Hyperlink myHelpLink;
 	private BackgroundOptionView myBackgroundOptionView;
 	private ImageOptionView myImageOptionView;
 	private PenOptionView myPenOptionView;
+	private LanguageOptionView myLanguageOptionView;
 
 	public ToolbarView(double width) {
 
@@ -40,8 +37,9 @@ public class ToolbarView implements SubcomponentViewAPI {
 		myToolbar.setAlignment(Pos.CENTER);
 		myToolbar.setMinWidth(width);
 		addBackgroundColorOption();
-		addTurtleImageOption();
 		addPenColorOption();
+		addTurtleImageOption();
+		addLanguageOption();
 		addHelpLink();
 
 	}
@@ -59,6 +57,10 @@ public class ToolbarView implements SubcomponentViewAPI {
 	public PenOptionView getPenOptionView() {
 		return myPenOptionView;
 	}
+	
+	public LanguageOptionView getLanguageOptionView() {
+		return myLanguageOptionView;
+	}
 
 	// Must add to API
 	public ImageOptionView getImageOptionView() {
@@ -74,7 +76,7 @@ public class ToolbarView implements SubcomponentViewAPI {
 			if (Desktop.isDesktopSupported()) {
 				try {
 					Desktop.getDesktop().browse(
-							new URI("http://www.cs.duke.edu/courses/compsci308/current/assign/03_slogo/commands.php"));
+							new URI(myResources.getString("HelpURL")));
 				} catch (IOException e1) {
 					e1.printStackTrace();
 					showError(e1.getMessage());
@@ -103,6 +105,11 @@ public class ToolbarView implements SubcomponentViewAPI {
 	private void addPenColorOption() {
 		myPenOptionView = new PenOptionView();
 		myToolbar.getChildren().add(myPenOptionView.getParent());
+	}
+	
+	private void addLanguageOption() {
+		myLanguageOptionView = new LanguageOptionView();
+		myToolbar.getChildren().add(myLanguageOptionView.getParent());
 	}
 
 	private void showError(String message) {

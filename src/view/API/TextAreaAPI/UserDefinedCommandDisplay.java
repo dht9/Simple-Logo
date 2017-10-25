@@ -1,4 +1,4 @@
-package view.API;
+package view.API.TextAreaAPI;
 
 /**
  * A Pane showing the current commands available to the user. It implements

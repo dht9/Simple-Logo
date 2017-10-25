@@ -1,6 +1,4 @@
-package view.API;
-
-import javafx.scene.image.Image;
+package view.API.CommandIOAPI;
 
 /**
  * Allows detection of image changes for turtles.
@@ -10,6 +8,6 @@ import javafx.scene.image.Image;
  */
 public interface TurtleImageListener {
 
-	public void imageChange(Image image);
+	public void imageChange(int imageIndex);
 
 }

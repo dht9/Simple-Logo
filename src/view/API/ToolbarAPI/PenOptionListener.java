@@ -1,4 +1,4 @@
-package view.API;
+package view.API.ToolbarAPI;
 
 import javafx.scene.paint.Color;
 

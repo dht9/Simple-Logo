@@ -1,4 +1,4 @@
-package view;
+package view.Toolbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,9 +16,9 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import view.API.BackgroundOptionListener;
-import view.API.ImageOptionDisplay;
-import view.API.TurtleImageListener;
+import view.API.CommandIOAPI.TurtleImageListener;
+import view.API.ToolbarAPI.BackgroundOptionListener;
+import view.API.ToolbarAPI.ImageOptionDisplay;
 
 /**
  * Class that allows users to select a canvas color from a choice box.
@@ -34,7 +34,6 @@ public class ImageOptionView implements ImageOptionDisplay {
 	private ResourceBundle myResources = ResourceBundle.getBundle("resources.view/choicebox");
 	private TurtleImageListener listener;
 	private List<String> imageNameList;
-	private List<Image> imageList;
 
 	public ImageOptionView() {
 
@@ -44,27 +43,21 @@ public class ImageOptionView implements ImageOptionDisplay {
 
 		imageNameList = new ArrayList<String>(new ArrayList<String>(
 				Arrays.asList(myResources.getString("TurtleImages").replaceAll("\\s+", "").split(","))));
-		imageList = new ArrayList<Image>();
 		
-		for (String s : imageNameList) {
-			Image image = new Image(
-					getClass().getClassLoader().getResourceAsStream("resources/images/" + s));
-			imageList.add(image);
+		cb = new ChoiceBox<String>();
+		for (String imageName : imageNameList) {
+			cb.getItems().add(imageNameList.indexOf(imageName) + ". " + imageName);
 		}
-
-		cb = new ChoiceBox<String>(FXCollections.observableArrayList(imageNameList));
-		cb.setTooltip(new Tooltip("Select the turtle image"));
+		
 		cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				System.out.println(newValue.intValue());
-				listener.imageChange(imageList.get(newValue.intValue()));
+				//System.out.println(newValue.intValue());
+				listener.imageChange(newValue.intValue());
 
 			}
 		});
-
-		cb.setId("background_cb");
 
 		optionView.getChildren().addAll(prompt, cb);
 		optionView.setAlignment(Pos.CENTER);

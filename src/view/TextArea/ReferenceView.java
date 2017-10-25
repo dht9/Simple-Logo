@@ -1,4 +1,4 @@
-package view;
+package view.TextArea;
 
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -9,7 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
 import model.CommandDef;
-import view.API.StringListener;
+import view.API.TextAreaAPI.StringListener;
 
 /**
  * A Pane representing the basic instructions for using SLogo.

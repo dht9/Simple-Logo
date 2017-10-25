@@ -1,4 +1,7 @@
-package view.API;
+package view.API.ToolbarAPI;
+
+import view.API.SubcomponentViewAPI;
+import view.API.CommandIOAPI.TurtleImageListener;
 
 public interface ImageOptionDisplay extends SubcomponentViewAPI{
 

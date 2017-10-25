@@ -1,7 +1,7 @@
 package model;
 
 import javafx.scene.paint.Color;
-import view.API.TurtleListener;
+import view.API.CommandIOAPI.TurtleListener;
 
 /**
  * A representation of the state of the turtle at a given time. Notifies all
@@ -19,9 +19,9 @@ public class Turtle implements ImmutableTurtle {
 	private double initHeading;
 	private boolean penDown;
 	private boolean isVisible;
-	private Color penColor;
+	private int penColorIndex;
 	
-	public static final Color DEFAULT_PEN_COLOR = Color.BLACK;
+	public static final int DEFAULT_PEN_COLOR_INDEX = 0;
 	
 	public Turtle(double x0, double y0, double heading0) {
 		x = initX = x0;
@@ -29,7 +29,7 @@ public class Turtle implements ImmutableTurtle {
 		heading = initHeading = heading0;
 		penDown = true;
 		isVisible = true;
-		penColor = DEFAULT_PEN_COLOR;
+		penColorIndex = DEFAULT_PEN_COLOR_INDEX;
 	}
 	
 	// need to add to interface
@@ -37,7 +37,7 @@ public class Turtle implements ImmutableTurtle {
 		listener = tL;
 		tL.setTurtle(this);
 	}
-	
+
 	public double getX() {
 		return x;
 	}
@@ -58,21 +58,19 @@ public class Turtle implements ImmutableTurtle {
 		return isVisible;
 	}
 
-	public Color getPenColor() {
-		return penColor;
+	public int getPenColorIndex() {
+		return penColorIndex;
 	}
 
 	public void setXY(double newX, double newY) {
 		x = newX;
 		y = newY;
 		listener.locationChange(newX, newY);
-//		System.out.println(x + ", " + y);
 	}
 
 	public void setHeading(double newHeading) {
 		heading = newHeading;
 		listener.headingChange(newHeading);
-//		System.out.println("H = " + heading);
 	}
 
 	public void setPenDown(boolean down) {
@@ -84,14 +82,13 @@ public class Turtle implements ImmutableTurtle {
 		isVisible = visible;
 		listener.visibilityChange(visible);
 	}
-
-	@Override
-	public void setPenColor(Color color) {
-		penColor = color;
-		listener.penColorChange(color);
+	
+	public void setPenColor(int index) {
+		penColorIndex = index;
+		listener.penColorChange(index);
 	}
 
-	/**
+    /**
 	 * Returns to original position, heading, visibility, and pen position, then notifies the listeners to clear
 	 */
 	public void clearScreen() {
@@ -99,7 +96,7 @@ public class Turtle implements ImmutableTurtle {
 		setHeading(initHeading);
 		setPenDown(true);
 		setVisible(true);
-		setPenColor(DEFAULT_PEN_COLOR);
+		setPenColor(DEFAULT_PEN_COLOR_INDEX);
 		listener.clearScreen();
 	}
 }

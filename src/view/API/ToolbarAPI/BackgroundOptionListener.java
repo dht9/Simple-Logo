@@ -1,4 +1,4 @@
-package view.API;
+package view.API.ToolbarAPI;
 
 import javafx.scene.paint.Color;
 
@@ -13,6 +13,6 @@ public interface BackgroundOptionListener {
 	/**
 	 * Changes the background color.
 	 */
-	public void backgroundColorChange(Color color);
+	public void backgroundColorChange(int colorIndex);
 	
 }

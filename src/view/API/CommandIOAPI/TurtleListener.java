@@ -1,7 +1,6 @@
-package view.API;
+package view.API.CommandIOAPI;
 
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
 import model.ImmutableTurtle;
 
 /**
@@ -14,6 +13,7 @@ public interface TurtleListener extends TurtleImageListener {
 	/**
 	 * Gives the listener a Turtle to keep track of the state
 	 * @param turtle A turtle with an observable state
+     * @param userTurtle A turtle that can be changed
 	 */
 	public void setTurtle(ImmutableTurtle turtle);
 
@@ -28,7 +28,7 @@ public interface TurtleListener extends TurtleImageListener {
 	 * Called when the turtle turns
 	 * @param dtheta change in heading
 	 */
-	public void headingChange(double dtheta);
+	public void headingChange(double newAngle);
 
 	/**
 	 * Called when the pen's state (up/down) is toggled
@@ -43,17 +43,13 @@ public interface TurtleListener extends TurtleImageListener {
 	/**
 	 * Called when the pen color is changed
 	 */
-	public void penColorChange(Color color);
+	public void penColorChange(int colorIndex);
 
 	/**
 	 * Called when the screen should be cleared
 	 */
 	public void clearScreen();
-	
-	/**
-	 * Called when user presses key to move turtle
-	 */
-	public void handleInput(KeyCode code);
+
 
 }
 

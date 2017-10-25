@@ -1,4 +1,6 @@
-package view.API;
+package view.API.ToolbarAPI;
+
+import view.API.SubcomponentViewAPI;
 
 /**
  * Allows detection of background color change.

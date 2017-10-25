@@ -23,12 +23,14 @@ public class Parser implements TokenDispenser{
 		this.availableCommands = availableCommands;
 	}
 	
+	@Override
 	public String peek() throws SLogoException {
 		if(!hasNextCommand())
 			throw new SLogoException("EOF");
 		return tokens[index];
 	}
 	
+	@Override
 	public String getNextToken() throws SLogoException {
 		if(!hasNextCommand())
 			throw new SLogoException("EOF");
@@ -36,6 +38,7 @@ public class Parser implements TokenDispenser{
 		return tokens[index-1];
 	}
 	
+	@Override
 	public String getNextVariable() throws SLogoException {
 		String name = getNextToken();
 		if(!name.matches(SYNTAX.getString("Variable")))
@@ -47,6 +50,7 @@ public class Parser implements TokenDispenser{
 		return index < tokens.length && tokens[index].length()>0;
 	}
 	
+	@Override
 	public Command getNextCommand() throws SLogoException {
 		String token = getNextToken();
 		

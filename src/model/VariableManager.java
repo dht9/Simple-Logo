@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import view.API.VariableListener;
+import view.API.TextAreaAPI.VariableListener;
 
 public class VariableManager {
 	private Map<String, Double> globals = new HashMap<>();

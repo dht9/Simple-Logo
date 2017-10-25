@@ -1,6 +1,7 @@
-package view.API;
+package view.API.CommandIOAPI;
 
 import javafx.scene.paint.Color;
+import view.API.SubcomponentViewAPI;
 
 /**
  * The Pane responsible for presenting the turtle the lines it has drawn, along

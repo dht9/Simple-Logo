@@ -1,4 +1,6 @@
-package view.API;
+package view.API.TextAreaAPI;
+
+import view.API.SubcomponentViewAPI;
 
 /**
  * A Pane showing the current variables available to the user. It implements

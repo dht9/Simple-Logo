@@ -3,9 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import view.API.StringListener;
-import view.API.TurtleListener;
-import view.API.VariableListener;
+import view.API.CommandIOAPI.TurtleListener;
+import view.API.TextAreaAPI.StringListener;
+import view.API.TextAreaAPI.VariableListener;
+import view.API.ToolbarAPI.LanguageListener;
 
 public class Model {
 	
@@ -48,8 +49,13 @@ public class Model {
 	public void execute(String code) throws SLogoException {
 		Parser parser = new Parser(code, commands);
 		while(parser.hasNextCommand()) {
-			parser.getNextCommand().execute(turtles.get(0), commands, variables);
-			variables.notifyListeners();
+
+			for (Turtle turtle : turtles) {
+			    // must implement if turtle is toggled
+				parser.getNextCommand().execute(turtle, commands, variables);
+				variables.notifyListeners();
+			}
+
 		}
 	}
 }

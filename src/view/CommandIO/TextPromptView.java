@@ -1,4 +1,4 @@
-package view;
+package view.CommandIO;
 
 import java.util.function.Consumer;
 
@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import view.API.TextPromptDisplay;
+import view.API.CommandIOAPI.TextPromptDisplay;
 
 /**
  * Class allowing users to enter and clear commands.
@@ -61,7 +61,7 @@ public class TextPromptView extends HBox implements TextPromptDisplay {
 		return ret;
 	}
 
-	private void enter() {
+	public void enter() {
 		String code = tp.getText();
 		commandConsumer.accept(code);
 		clear();
@@ -71,6 +71,14 @@ public class TextPromptView extends HBox implements TextPromptDisplay {
 		tp.clear();
 	}
 
+
 	/*************************** PUBLIC METHODS ********************************/
 
+
+	@Override
+	public void runCommand(String s) {
+		commandConsumer.accept(s);
+		
+	}
+	
 }

@@ -1,4 +1,4 @@
-package view;
+package view.TextArea;
 
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -6,8 +6,8 @@ import java.util.ResourceBundle;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import view.API.TextAreaAPI.VariableDisplay;
 import javafx.scene.control.TextArea;
-import view.API.VariableDisplay;
 
 /**
  * Class allowing users to see values of current variables

@@ -1,4 +1,4 @@
-package view;
+package view.Toolbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,50 +13,50 @@ import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import view.API.BackgroundOptionDisplay;
-import view.API.BackgroundOptionListener;
+import view.API.CommandIOAPI.TurtleListener;
+import view.API.ToolbarAPI.BackgroundOptionListener;
+import view.API.ToolbarAPI.PenOptionDisplay;
+import view.API.ToolbarAPI.PenOptionListener;
 
 /**
- * Class that allows users to select a canvas color from a choice box.
+ * Class that allows users to select a pen color from a choice box.
  * 
- * @author DavidTran
+ * @author taekwhunchung
  *
  */
-public class BackgroundOptionView implements BackgroundOptionDisplay {
+public class PenOptionView implements PenOptionDisplay {
 
 	private VBox optionView;
 	private Label prompt;
 	private ChoiceBox<String> cb;
 	private List<String> colorList;
 	private ResourceBundle myResources = ResourceBundle.getBundle("resources.view/choicebox");
-	private BackgroundOptionListener listener;
+	private TurtleListener listener;
 
-	public BackgroundOptionView() {
+	public PenOptionView() {
 
 		optionView = new VBox();
-		
-		prompt = new Label(myResources.getString("BackgroundPrompt"));
-		
-		colorList = new ArrayList<String>(
-				Arrays.asList(myResources.getString("BackgroundColors").replaceAll("\\s+", "").split(",")));
 
-		cb = new ChoiceBox<String>(FXCollections.observableArrayList(colorList));
-		cb.setTooltip(new Tooltip("Select the background color"));
+		prompt = new Label(myResources.getString("PenPrompt"));
+
+		colorList = new ArrayList<String>(
+				Arrays.asList(myResources.getString("PenColors").replaceAll("\\s+", "").split(",")));
+
+		cb = new ChoiceBox<String>();
+		
+		for (String color : colorList)
+			cb.getItems().add(colorList.indexOf(color) + ". " + color);
+		
 		cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				System.out.println(newValue.intValue());
-				listener.backgroundColorChange(Color.valueOf((colorList.get(newValue.intValue()))));
-
+				listener.penColorChange(newValue.intValue());
 			}
 		});
-		
-		cb.setId("background_cb");
-		
+
 		optionView.getChildren().addAll(prompt, cb);
 		optionView.setAlignment(Pos.CENTER);
 	}
@@ -67,9 +67,8 @@ public class BackgroundOptionView implements BackgroundOptionDisplay {
 	}
 
 	@Override
-	public void addBackgroundOptionListener(BackgroundOptionListener l) {
+	public void addPenOptionListener(TurtleListener l) {
 		listener = l;
-
 	}
 
 }

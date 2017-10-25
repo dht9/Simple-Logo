@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import view.API.StringListener;
+import view.API.TextAreaAPI.StringListener;
 
 public class CommandManager {
 	public static final String PATH_START = "resources.languages.";
@@ -77,7 +77,6 @@ public class CommandManager {
 	}
 
 	public boolean checkIfBuiltIn(String name) {
-		// System.out.println(builtInCommands.keySet().toString());
 		for (String regex : builtInCommands.keySet()) {
 			if (name.matches(regex))
 				return true;
