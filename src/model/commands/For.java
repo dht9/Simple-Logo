@@ -7,8 +7,13 @@ import model.CommandManager;
 import model.Turtle;
 import model.VariableManager;
 
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
 public class For implements Command {
 
+	private static final long serialVersionUID = 1L;
 	private String varName;
 	private Command start;
 	private Command end;

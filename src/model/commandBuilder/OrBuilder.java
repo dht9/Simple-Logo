@@ -1,16 +1,20 @@
 package model.commandBuilder;
 
 import model.Command;
-import model.CommandDef;
 import model.SLogoException;
+import model.StackGroupCommandBuilder;
 import model.TokenDispenser;
 import model.commands.Or;
 
-public class OrBuilder implements CommandDef {
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
+public class OrBuilder extends StackGroupCommandBuilder {
 
 	@Override
-	public Command build(TokenDispenser dispenser) throws SLogoException {
-		return new Or(dispenser.getNextCommand(), dispenser.getNextCommand());
+	public Command build(TokenDispenser dispenser, Command last) throws SLogoException {
+		return new Or(last, dispenser.getNextCommand());
 	}
 
 }

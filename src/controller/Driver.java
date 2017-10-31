@@ -1,49 +1,55 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import controller.API.DriverAPI;
 import javafx.stage.Stage;
 import model.CommandManager;
 import model.Model;
-import model.SLogoException;
-import model.Turtle;
 import view.View;
-import view.API.ToolbarAPI.LanguageListener;
+import view.Animation.TurtleListener;
 
-public class Driver implements DriverAPI, LanguageListener {
+/**
+ * @author Aaron Paskin
+ *
+ */
+public class Driver implements DriverAPI {
 
 	private View myView;
 	private Model myModel;
 
 	/**
-	 * Constructor
+	 * Construct a driver, loads a model and view
 	 */
 	public Driver(Stage stage) {
-		myView = new View(stage, this, s -> execute(s));
-		CommandManager commandManager = new CommandManager("resources.builders.basicCommands");
-		myModel = new Model(commandManager);
-	}
-	
-	private void execute(String s) {
-		try {
-			myModel.execute(s);
-		} catch (SLogoException e) {
-			myView.display(e);
-		}
+		myView = new View(stage, s -> languageChange(s), s -> myModel.execute(s), () -> run(), s -> myModel.save(s),
+				s -> myModel.load(s));
 	}
 
+	private List<TurtleListener> getListeners() {
+		List<TurtleListener> list = new ArrayList<>();
+		list.add(myView.getNewTurtleListener());
+		list.add(myView.getStateViewListener());
+		return list;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see controller.API.DriverAPI#run()
+	 */
 	@Override
 	public void run() {
-		Turtle t = new Turtle(0, 0, 0);
-		myModel.addTurtle(t, myView.getTurtleListener());
+		CommandManager commandManager = new CommandManager("resources.builders.completeCommands");
+		myModel = new Model(commandManager, this::getListeners);
+		myModel.addTurtle();
 		myModel.addCommandListener(myView.getCommandListener());
 		myModel.addCommandListener(myView.getUserDefinedCommandListener());
 		myModel.addVariableListener(myView.getVariableListener());
 	}
 
-	@Override
-	public void languageChange(String language) {
-		//System.out.println(language);
+	private void languageChange(String language) {
 		myModel.setLanguage(language);
-		
 	}
 }

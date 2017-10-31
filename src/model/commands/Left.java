@@ -5,8 +5,13 @@ import model.CommandManager;
 import model.Turtle;
 import model.VariableManager;
 
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
 public class Left implements Command {
 
+	private static final long serialVersionUID = -6316260648514400919L;
 	private Command input;
 
 	public Left(Command par1) {
@@ -15,9 +20,7 @@ public class Left implements Command {
 
 	@Override
 	public double execute(Turtle t, CommandManager commands, VariableManager variables) {
-		double result = input.execute(t, commands, variables);
-		t.setHeading(t.getHeading() + result);
-		return result;
+		return t.left(input, commands, variables);
 	}
 
 }

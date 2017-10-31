@@ -5,8 +5,13 @@ import model.CommandManager;
 import model.Turtle;
 import model.VariableManager;
 
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
 public class Product implements Command {
 
+	private static final long serialVersionUID = -2577392820254437807L;
 	private Command first;
 	private Command second;
 	

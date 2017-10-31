@@ -8,8 +8,13 @@ import model.CommandManager;
 import model.Turtle;
 import model.VariableManager;
 
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
 public class If implements Command {
 
+	private static final long serialVersionUID = -5099312010244566197L;
 	private Command expr;
 	private List<Command> input;
 	

@@ -5,8 +5,13 @@ import model.CommandManager;
 import model.Turtle;
 import model.VariableManager;
 
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
 public class Remainder implements Command {
 
+	private static final long serialVersionUID = 7061576022464306697L;
 	private Command x1;
 	private Command x2;
 	

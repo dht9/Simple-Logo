@@ -1,13 +1,17 @@
 package model.commandBuilder;
 
 import model.Command;
-import model.CommandDef;
+import model.CommandBuilder;
 import model.SLogoException;
 import model.TokenDispenser;
 import model.commands.For;
 import model.commands.NumberCommand;
 
-public class RepeatBuilder implements CommandDef {
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
+public class RepeatBuilder implements CommandBuilder {
 	public static final String REP_COUNT = ":repcount";
 	
 	@Override

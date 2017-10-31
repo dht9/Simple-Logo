@@ -1,18 +1,22 @@
 package model.commandBuilder;
 
 import model.Command;
-import model.CommandDef;
 import model.SLogoException;
+import model.StackGroupCommandBuilder;
 import model.TokenDispenser;
 import model.commands.NumberCommand;
 import model.commands.Pow;
 import model.commands.Product;
 
-public class QuotientBuilder implements CommandDef {
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
+public class QuotientBuilder extends StackGroupCommandBuilder {
 
 	@Override
-	public Command build(TokenDispenser dispenser) throws SLogoException {
-		return new Product(dispenser.getNextCommand(), new Pow(dispenser.getNextCommand(), new NumberCommand(-1)));
+	public Command build(TokenDispenser dispenser, Command last) throws SLogoException {
+		return new Product(last, new Pow(dispenser.getNextCommand(), new NumberCommand(-1)));
 	}
 
 }

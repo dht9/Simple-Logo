@@ -5,8 +5,13 @@ import model.CommandManager;
 import model.Turtle;
 import model.VariableManager;
 
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
 public class Log implements Command {
 
+	private static final long serialVersionUID = -6564968783754638512L;
 	private Command a;
 	
 	public Log(Command a) {

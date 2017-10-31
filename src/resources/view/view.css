@@ -2,11 +2,15 @@ VBox {
 	-fx-background-color: #3a4b53;
 }
 
+#var-VBox {
+	-fx-background-color: #435761
+}
+
 HBox {
 	-fx-background-color: #3a4b53;
-	-fx-spacing: 5;
+	-fx-spacing: 5.0;
 	-fx-alignment: center-left;
-	-fx-padding: 10,10,10,10;
+	-fx-padding: 10.0,10.0,10.0,10.0;
 }
 
 .root {
@@ -78,52 +82,67 @@ HBox {
 	-fx-background-color: #dfe5e8;
 	-fx-focus-color: #000000;
 
-	-fx-background-insets: 0 0 0 0, 0, 1, 2;
-  	-fx-background-radius: 3px, 3px, 2px, 1px;
+	-fx-background-insets: 0.0 0.0 0.0 0.0, 0.0, 1.0, 2.0;
+  	-fx-background-radius: 3.0px, 3.0px, 2.0px, 1.0px;
 }
 
 #text-prompt .content {
 	-fx-background-color: #f5f7f8;
 }
 
-.hyperlink {
+#help-hyperlink {
 	-fx-text-fill: #f5f7f8;
 	-fx-border-color: #f5f7f8;
+}
+
+.hyperlink {
+	-fx-text-fill: #f5f7f8;
 }
 
 .label {
 	-fx-text-fill: #f5f7f8;
 }
 
+.slider .track {
+    -fx-control-inner-background: #f5f7f8;
+}
+
+.slider .axis { 
+	-fx-tick-label-fill:  #f5f7f8;
+}
 .turtleView {
   -fx-background-color:transparent;
 }
 
 .turtleView:hover {
- 	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+ 	-fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.8), 10.0, 0.0, 0.0, 0.0);
 }
 
 .turtleView:border {
     -fx-border-color: black;
     -fx-border-style: solid;
-    -fx-border-width: 5;
+    -fx-border-width: 5.0;
 }
 
 .turtleView:toggle {
-	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 15, 0, 0, 0);
+	-fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.8), 15.0, 0.0, 0.0, 0.0);
 }
 
-/*.btn {
-	-fx-text-fill: ##3a4b53;
-	-fx-background-color: #dfe5e8;//#45e03a;
-	-fx-background-radius: 45;
+#toolbar-button {
+	-fx-text-fill: #f5f7f8;
+	-fx-background-color: #7d97a5;
 }
 
-.btn:hover {
-	-fx-background-color: ##becbd2;
+#toolbar-button:hover {
+	-fx-text-fill: #3a4b53;
+	-fx-background-color: #f5f7f8;	
 }
-*/
 
-/*.check-box {
-	-fx-text-fill: #ff3d3d;
-}*/
+#toolbar-button:pressed  {
+	-fx-text-fill: #f5f7f8;
+	-fx-background-color: #7d97a5;
+}
+
+.check-box {
+	-fx-text-fill: #f5f7f8;
+}

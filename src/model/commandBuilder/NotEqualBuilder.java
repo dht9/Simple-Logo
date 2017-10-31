@@ -1,16 +1,20 @@
 package model.commandBuilder;
 
 import model.Command;
-import model.CommandDef;
+import model.CommandBuilder;
 import model.SLogoException;
 import model.TokenDispenser;
-import model.commands.NotEqual;
+import model.commands.Equal;
+import model.commands.Not;
 
-public class NotEqualBuilder implements CommandDef {
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
+public class NotEqualBuilder implements CommandBuilder {
 
 	@Override
 	public Command build(TokenDispenser dispenser) throws SLogoException {
-		return new NotEqual(dispenser.getNextCommand(), dispenser.getNextCommand());
+		return new Not(new Equal(dispenser.getNextCommand(), dispenser.getNextCommand()));
 	}
-
 }

@@ -8,7 +8,7 @@ package controller.API;
  */
 public interface DriverAPI {
 	/**
-	 * Starts the programming environment
+	 * Loads a new Model and starts the programming environment.
 	 */
 	public void run(); 
 }

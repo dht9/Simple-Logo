@@ -5,8 +5,13 @@ import model.CommandManager;
 import model.Turtle;
 import model.VariableManager;
 
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
 public class SetXY implements Command {
 
+	private static final long serialVersionUID = -55153100404545620L;
 	private Command x;
 	private Command y;
 	
@@ -17,12 +22,7 @@ public class SetXY implements Command {
 	
 	@Override
 	public double execute(Turtle t, CommandManager commands, VariableManager variables) {
-		double newX = x.execute(t, commands, variables);
-		double newY = y.execute(t, commands, variables);
-		double dx = newX - t.getX();
-		double dy = newY - t.getY();
-		t.setXY(newX, newY);
-		return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+		return t.setXY(x, y, commands, variables);
 	}
 
 }

@@ -5,8 +5,13 @@ import model.CommandManager;
 import model.Turtle;
 import model.VariableManager;
 
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
 public class SetHeading implements Command {
 
+	private static final long serialVersionUID = 7489917969522945122L;
 	private Command input;
 	
 	public SetHeading(Command par1) {
@@ -15,9 +20,7 @@ public class SetHeading implements Command {
 	
 	@Override
 	public double execute(Turtle t, CommandManager commands, VariableManager variables) {
-		double result = input.execute(t, commands, variables);
-		t.setHeading(result);
-		return Math.abs(t.getHeading() - result);
+		return t.setHeading(input, commands, variables);
 	}
 
 }

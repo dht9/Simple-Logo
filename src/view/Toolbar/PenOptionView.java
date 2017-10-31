@@ -1,24 +1,10 @@
 package view.Toolbar;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.function.BiConsumer;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import view.API.CommandIOAPI.TurtleListener;
-import view.API.ToolbarAPI.BackgroundOptionListener;
-import view.API.ToolbarAPI.PenOptionDisplay;
-import view.API.ToolbarAPI.PenOptionListener;
 
 /**
  * Class that allows users to select a pen color from a choice box.
@@ -26,49 +12,39 @@ import view.API.ToolbarAPI.PenOptionListener;
  * @author taekwhunchung
  *
  */
-public class PenOptionView implements PenOptionDisplay {
+public class PenOptionView extends OptionView {
 
-	private VBox optionView;
-	private Label prompt;
-	private ChoiceBox<String> cb;
-	private List<String> colorList;
-	private ResourceBundle myResources = ResourceBundle.getBundle("resources.view/choicebox");
-	private TurtleListener listener;
+	private static final String PROMPT = "PenPrompt";
+	private BiConsumer<String, String> myCommandConsumer;
 
-	public PenOptionView() {
+	public PenOptionView(List<String> colorList, BiConsumer<String, String> commandConsumer) {
+		super(PROMPT);
+		myCommandConsumer = commandConsumer;
+		makeChoiceBox(colorList);
+	}
 
-		optionView = new VBox();
+	/**
+	 * method that creates default ChoiceBoxes. Also changes ChoiceBox when user
+	 * defines new Color.
+	 * 
+	 * @param colorList
+	 */
 
-		prompt = new Label(myResources.getString("PenPrompt"));
+	public void makeChoiceBox(List<String> colorList) {
+		cb.getItems().removeAll(cb.getItems());
 
-		colorList = new ArrayList<String>(
-				Arrays.asList(myResources.getString("PenColors").replaceAll("\\s+", "").split(",")));
-
-		cb = new ChoiceBox<String>();
-		
 		for (String color : colorList)
 			cb.getItems().add(colorList.indexOf(color) + ". " + color);
-		
+
 		cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				listener.penColorChange(newValue.intValue());
+				myCommandConsumer.accept("SetPenColor", Integer.toString(newValue.intValue()));
 			}
 		});
 
-		optionView.getChildren().addAll(prompt, cb);
-		optionView.setAlignment(Pos.CENTER);
-	}
-
-	@Override
-	public Parent getParent() {
-		return optionView;
-	}
-
-	@Override
-	public void addPenOptionListener(TurtleListener l) {
-		listener = l;
+		cb.setMinWidth(cb.getWidth());
 	}
 
 }

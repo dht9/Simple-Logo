@@ -5,8 +5,13 @@ import model.CommandManager;
 import model.Turtle;
 import model.VariableManager;
 
+/**
+ * @author Aaron Paskin
+ * @author Ian Eldridge-Allegra
+ */
 public class Make implements Command {
 
+	private static final long serialVersionUID = -8024247388009867582L;
 	private String variable;
 	private Command value;
 	

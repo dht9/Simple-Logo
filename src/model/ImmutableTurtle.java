@@ -1,12 +1,12 @@
 package model;
 
-import javafx.scene.paint.Color;
-
 /**
- * A view-only version of 
+ * A Turtle that is primarily view-only. 
  * @see Turtle
  */
 public interface ImmutableTurtle {
+	public int getID();
+	
 	public double getX();
 
 	public double getY();
@@ -18,5 +18,12 @@ public interface ImmutableTurtle {
 	public boolean isVisible();
 
 	public int getPenColorIndex();
+	
+	public void setActive(boolean active);
 
+	public boolean isActive();
+	
+	public double getPenSize();
+	
+	public int getShapeIndex();
 }

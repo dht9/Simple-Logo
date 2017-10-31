@@ -1,23 +1,10 @@
 package view.Toolbar;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.function.BiConsumer;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import view.API.ToolbarAPI.BackgroundOptionDisplay;
-import view.API.ToolbarAPI.BackgroundOptionListener;
 
 /**
  * Class that allows users to select a canvas color from a choice box.
@@ -25,52 +12,38 @@ import view.API.ToolbarAPI.BackgroundOptionListener;
  * @author DavidTran
  *
  */
-public class BackgroundOptionView implements BackgroundOptionDisplay {
+public class BackgroundOptionView extends OptionView {
 
-	private VBox optionView;
-	private Label prompt;
-	private ChoiceBox<String> cb;
-	private List<String> colorList;
-	private ResourceBundle myResources = ResourceBundle.getBundle("resources.view/choicebox");
-	private BackgroundOptionListener listener;
+	private static final String PROMPT = "BackgroundPrompt";
+	private BiConsumer<String, String> myCommandConsumer;
 
-	public BackgroundOptionView() {
+	public BackgroundOptionView(List<String> colorList, BiConsumer<String, String> commandConsumer) {
+		super(PROMPT);
+		myCommandConsumer = commandConsumer;
+		makeChoiceBox(colorList);
+	}
 
-		optionView = new VBox();
-		
-		prompt = new Label(myResources.getString("BackgroundPrompt"));
-		
-		colorList = new ArrayList<String>(
-				Arrays.asList(myResources.getString("BackgroundColors").replaceAll("\\s+", "").split(",")));
+	/**
+	 * Called when a choice-box needs to be made/updated.
+	 * 
+	 * @param list
+	 *            - colorList to display choice-box options
+	 */
+	public void makeChoiceBox(List<String> colorList) {
 
-		cb = new ChoiceBox<String>();
-		
+		cb.getItems().removeAll(cb.getItems());
+
 		for (String color : colorList)
 			cb.getItems().add(colorList.indexOf(color) + ". " + color);
-	
+
 		cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				//System.out.println(newValue.intValue());
-				listener.backgroundColorChange(newValue.intValue());
-
+				myCommandConsumer.accept("SetBackground", Integer.toString(newValue.intValue()));
 			}
 		});
-		
-		optionView.getChildren().addAll(prompt, cb);
-		optionView.setAlignment(Pos.CENTER);
+
+		cb.setMinWidth(cb.getWidth());
 	}
-
-	@Override
-	public Parent getParent() {
-		return optionView;
-	}
-
-	@Override
-	public void addBackgroundOptionListener(BackgroundOptionListener l) {
-		listener = l;
-
-	}
-
 }
