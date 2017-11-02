@@ -7,6 +7,9 @@ Aaron Paskin, Ian Eldridge-Allegra -- Back-End
 
 10/10 to 10/30
 
+Interface:
+<img src="doc/ActualSlogoInterface.png" width="900">
+
 Resources cited in line where applicable. 
 
 To run: Main.java
@@ -30,3 +33,4 @@ Some basic design decisions:
 * unlimited arguments for differences and quotients are handled as the first argument minus/divided by all others.
 * Tell, ask, askwith will throw an exception when nested inside turtle commands -- you can't ask each turtle to tell other turtles something. 
 * Writing 
+
