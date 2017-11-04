@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import view.SubcomponentViewAPI;
 
 /**
- * Super class for sub-windos displayed on side scroll panes.
+ * Super class for sub-windows displayed on side scroll panes.
  * 
  * @author DavidTran
  *

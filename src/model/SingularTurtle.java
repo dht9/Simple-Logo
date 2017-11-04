@@ -9,8 +9,21 @@ import view.Animation.TurtleListener;
 /**
  * A representation of the state of the turtle at a given time. Notifies all
  * TurtleListeners when changes are made to the state.
+ * 
+ * Code masterpiece: This class implements an Observer Design Pattern. This
+ * design pattern defines a one-to-many dependency between SingularTurtle
+ * (back-end) and TurtleListener (front-end). This class represents the "one" in
+ * the dependency because it updates several listeners.
+ * 
+ * This class is well designed because whenever the SingularTurtle changes its
+ * state(s), its listeners are notified with the exact change(s) due to the
+ * Observer design pattern. Essentially, the listeners are observing any changes
+ * to the SingularTurtle. This class provides encapsulation because it does not
+ * control how the TurtleListener defines its particular method behaviors. The
+ * SingularTurtle simply calls those methods to notify the TurtleListener that a
+ * change of turtle state has occurred.
  *
- *	@author Aaron Paskin
+ * @author Aaron Paskin, David Tran, Ian Eldridge-Allegra
  */
 public class SingularTurtle implements ImmutableTurtle, Turtle {
 
@@ -59,9 +72,10 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 		shapeIndex = DEFAULT_SHAPE_INDEX;
 		listeners = new ArrayList<>();
 	}
-	
+
 	/**
-	 * @param tL The TurtleListener to add
+	 * @param tL
+	 *            The TurtleListener to add
 	 */
 	public void addTurtleListener(TurtleListener tL) {
 		listeners.add(tL);
@@ -69,83 +83,106 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 	}
 
 	/**
-	 * @param numTurtles A Supplier that will always provide the number of turtles
+	 * @param numTurtles
+	 *            A Supplier that will always provide the number of turtles
 	 */
 	public void setNumTurtles(Supplier<Integer> numTurtles) {
 		this.numTurtles = numTurtles;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.Turtle#getNumTurtles()
 	 */
 	public int getNumTurtles() {
 		return numTurtles.get();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#getID()
 	 */
 	public int getID() {
 		return id;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#getX()
 	 */
 	public double getX() {
 		return x;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#getY()
 	 */
 	public double getY() {
 		return y;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#getHeading()
 	 */
 	public double getHeading() {
 		return heading;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#getPenDown()
 	 */
 	public boolean getPenDown() {
 		return penDown;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#isVisible()
 	 */
 	public boolean isVisible() {
 		return isVisible;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#isActive()
 	 */
 	public boolean isActive() {
 		return isActive;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#getPenColorIndex()
 	 */
 	public int getPenColorIndex() {
 		return penColorIndex;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#getPenSize()
 	 */
 	public double getPenSize() {
 		return penSize;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#getShapeIndex()
 	 */
 	@Override
@@ -154,8 +191,10 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 	}
 
 	/**
-	 * @param newX The target x location
-	 * @param newY The target y location
+	 * @param newX
+	 *            The target x location
+	 * @param newY
+	 *            The target y location
 	 * @return The distance moved
 	 */
 	public double setXY(double newX, double newY) {
@@ -168,7 +207,8 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 	}
 
 	/**
-	 * @param newHeading The target heading
+	 * @param newHeading
+	 *            The target heading
 	 */
 	public void setHeading(double newHeading) {
 		heading = newHeading;
@@ -176,7 +216,9 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 			tL.headingChange(newHeading);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.Turtle#setPenDown(boolean)
 	 */
 	public void setPenDown(boolean down) {
@@ -185,7 +227,9 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 			tL.penChange(down);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.Turtle#setVisible(boolean)
 	 */
 	public void setVisible(boolean visible) {
@@ -194,7 +238,9 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 			tL.visibilityChange(visible);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.Turtle#setPenColor(int)
 	 */
 	public void setPenColor(int index) {
@@ -203,7 +249,9 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 			tL.penColorChange(index);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.Turtle#setPenSize(double)
 	 */
 	@Override
@@ -213,7 +261,9 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 			tL.penSizeChange(penSize);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.Turtle#setBackgroundColor(int)
 	 */
 	public void setBackgroundColor(int index) {
@@ -222,7 +272,9 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 			tL.backgroundColorChange(backgroundColorIndex);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.Turtle#setShapeIndex(int)
 	 */
 	@Override
@@ -247,7 +299,9 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 		return ret;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.ImmutableTurtle#setActive(boolean)
 	 */
 	@Override
@@ -257,8 +311,11 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 			listener.activeToggle(active);
 	}
 
-	/* (non-Javadoc)
-	 * @see model.Turtle#forward(model.Command, model.CommandManager, model.VariableManager)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.Turtle#forward(model.Command, model.CommandManager,
+	 * model.VariableManager)
 	 */
 	public double forward(Command par, CommandManager commands, VariableManager variables) {
 		double result = par.execute(this, commands, variables);
@@ -267,8 +324,11 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see model.Turtle#left(model.Command, model.CommandManager, model.VariableManager)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.Turtle#left(model.Command, model.CommandManager,
+	 * model.VariableManager)
 	 */
 	public double left(Command input, CommandManager commands, VariableManager variables) {
 		double result = input.execute(this, commands, variables);
@@ -276,8 +336,11 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see model.Turtle#setHeading(model.Command, model.CommandManager, model.VariableManager)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.Turtle#setHeading(model.Command, model.CommandManager,
+	 * model.VariableManager)
 	 */
 	public double setHeading(Command input, CommandManager commands, VariableManager variables) {
 		double result = input.execute(this, commands, variables);
@@ -285,8 +348,11 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 		return Math.abs(getHeading() - result);
 	}
 
-	/* (non-Javadoc)
-	 * @see model.Turtle#setXY(model.Command, model.Command, model.CommandManager, model.VariableManager)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.Turtle#setXY(model.Command, model.Command, model.CommandManager,
+	 * model.VariableManager)
 	 */
 	public double setXY(Command xCor, Command yCor, CommandManager commands, VariableManager variables) {
 		double xC = xCor.execute(this, commands, variables);
@@ -294,8 +360,11 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 		return setXY(xC, yC);
 	}
 
-	/* (non-Javadoc)
-	 * @see model.Turtle#setTowards(model.Command, model.Command, model.CommandManager, model.VariableManager)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.Turtle#setTowards(model.Command, model.Command,
+	 * model.CommandManager, model.VariableManager)
 	 */
 	public double setTowards(Command xCor, Command yCor, CommandManager commands, VariableManager variables) {
 		double newHeading = Math.toDegrees(Math.atan2(getX() - xCor.execute(this, commands, variables),
@@ -307,7 +376,9 @@ public class SingularTurtle implements ImmutableTurtle, Turtle {
 		return dtheta;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see model.Turtle#setPalette(int, int, int, int)
 	 */
 	@Override

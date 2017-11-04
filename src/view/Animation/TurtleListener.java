@@ -12,7 +12,6 @@ public interface TurtleListener {
 	/**
 	 * Gives the listener a Turtle to keep track of the state
 	 * @param turtle A turtle with an observable state
-     * @param userTurtle A turtle that can be changed
 	 */
 	public void setTurtle(ImmutableTurtle turtle);
 

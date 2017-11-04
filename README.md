@@ -2,8 +2,8 @@
 
 A development environment that helps users write SLogo programs.
 
-David Tran, Ryan Chung -- Front-End
-Aaron Paskin, Ian Eldridge-Allegra -- Back-End
+*  Front-End: David Tran, Ryan Chung
+*  Back-End: Aaron Paskin, Ian Eldridge-Allegra
 
 10/10 to 10/30
 

@@ -8,26 +8,55 @@ import model.ImmutableTurtle;
 import view.Animation.TurtleListener;
 
 /**
- * Class allowing users to see attributes of current turtle.
+ * Displays the attributes of active turtles by observing the state of the
+ * SingularTurtles.
+ * 
+ * Code Masterpiece: This class implements an Observer design pattern. This
+ * design pattern defines a one-to-many dependency between SingularTurtle and
+ * TurtleListener. This class represents the "many" in this dependency. Whenever
+ * a SingularTurtle is created, it passes its Immutable self to the
+ * TurtleStateView (see setTurtle(ImmutableTurtle turtle)). Whenever the
+ * SingularTurtle changes states, it notifies its listeners, one of which is the
+ * TurtleStateView.
+ * 
+ * For example, if the SingularTurtle changes its heading, the SingularTurtle
+ * calls the headingChange() method of this class (see line 216 of
+ * SingularTurtle.java). Within this method, update() is called where the
+ * display is refreshed to show all active turtle attributes.
+ * 
+ * The Window superclass simply creates a ScrollPane and TextArea where active
+ * turtle attributes are displayed.
  * 
  * @author DavidTran
  *
  */
 public class TurtleStateView extends Window implements TurtleListener {
-	private List<ImmutableTurtle> myTurtles = new ArrayList<>();
-	private static final ResourceBundle myResources = ResourceBundle.getBundle("resources.view/view");
 
+	private static final ResourceBundle myResources = ResourceBundle.getBundle("resources.view/view");
+	private List<ImmutableTurtle> myTurtles = new ArrayList<>();
 	private List<String> myImageNameList;
 	private List<String> myColorList;
 
-	public TurtleStateView(double height, List<String> imgList, List<String> colorList) {
+	/**
+	 * Constructor that initializes the ScrollPane & TextArea.
+	 * 
+	 * @param height
+	 *            - height of the display window
+	 * @param imageNameList
+	 *            - list of turtle image names
+	 * @param colorList
+	 *            - list of pen color names
+	 */
+	public TurtleStateView(double height, List<String> imageNameList, List<String> colorList) {
 		super(height);
 		ta.appendText(myResources.getString("TurtleStateView"));
-		myImageNameList = imgList;
+		myImageNameList = imageNameList;
 		myColorList = colorList;
 	}
 
-	// add to interface
+	/**
+	 * Updates the active turtle attribute display.
+	 */
 	private void update() {
 		ta.clear();
 		ta.appendText(myResources.getString("TurtleStateView") + "\n\n");
@@ -56,7 +85,6 @@ public class TurtleStateView extends Window implements TurtleListener {
 	@Override
 	public void setTurtle(ImmutableTurtle turtle) {
 		myTurtles.add(turtle);
-		// System.out.println("added turtle");
 		update();
 	}
 
@@ -126,7 +154,6 @@ public class TurtleStateView extends Window implements TurtleListener {
 	 */
 	public void updateColorList(List<String> colorList) {
 		myColorList = colorList;
-		update();
 	}
 
 }
