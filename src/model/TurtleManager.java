@@ -12,7 +12,7 @@ import view.Animation.TurtleListener;
 
 /**
  * Represents and holds all the turtles. Commands can be executed on the
- * TurtleManager, and will simply be excecuted on each active turtle. Iterating
+ * TurtleManager, and will simply be executed on each active turtle. Iterating
  * over an instance of this class iterates only over the active turtles.
  * 
  * @author Aaron Paskin
