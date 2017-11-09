@@ -5,7 +5,7 @@ A development environment that helps users write SLogo programs.
 *  Front-End: David Tran, Ryan Chung
 *  Back-End: Aaron Paskin, Ian Eldridge-Allegra
 
-10/10 to 10/30
+October 10, 2017 - October 30, 2017
 
 Interface:
 <img src="doc/ActualSlogoInterface.png" width="900">
